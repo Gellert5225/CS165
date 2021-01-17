@@ -1,3 +1,0 @@
-/home/gellert/Documents/cs165/Project1/CMakeFiles/rebuild_cache.dir
-/home/gellert/Documents/cs165/Project1/CMakeFiles/edit_cache.dir
-/home/gellert/Documents/cs165/Project1/CMakeFiles/Project1.dir
