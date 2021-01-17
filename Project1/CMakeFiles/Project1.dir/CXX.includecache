@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/gellert/Documents/cs165/Project1/src/main.cpp
+string
+-
+iostream
+-
+cstring
+-
+chrono
+-
+thread
+-
+vector
+-
+openssl/md5.h
+-
+
+/usr/local/ssl/include/openssl/e_os2.h
+openssl/opensslconf.h
+-
+inttypes.h
+-
+stdint.h
+-
+
+/usr/local/ssl/include/openssl/md5.h
+openssl/opensslconf.h
+-
+openssl/e_os2.h
+-
+stddef.h
+-
+
+/usr/local/ssl/include/openssl/opensslconf.h
+openssl/opensslv.h
+-
+
+/usr/local/ssl/include/openssl/opensslv.h
+

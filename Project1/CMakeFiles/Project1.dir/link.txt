@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/Project1.dir/src/main.cpp.o  -o bin/Project1  -lpthread /usr/local/ssl/lib/libssl.a /usr/local/ssl/lib/libcrypto.a 
