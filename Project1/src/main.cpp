@@ -4,6 +4,7 @@
 #include <chrono>
 #include <thread>
 #include <vector>
+#include <sys/sysinfo.h>
 
 #include <openssl/md5.h>
 
@@ -12,6 +13,7 @@ const std::string salt = "4fTgjp6q";
 const std::string goal = "5eNsoUHeovBd6S4E2BJWS1";
 static bool found = false;
 const int RANGE = 23762752;
+static int lines = 0;
 
 void incrementStr(std::string &str, const int amount = 1) {
 
@@ -106,12 +108,13 @@ void start(int thread_id) {
 
     std::string result;
 
-    std::cout << "Thread " << thread_id << " is checking from " << lower << " to " << upper << std::endl;
+    // std::cout << "Thread " << thread_id << " is checking from " << lower << " to " << upper << std::endl;
 
     while (!found && lower != upper) {
         result = md5_encrypt(lower, salt);
+        lines++;
 
-        std::cout << "Thread " << thread_id << " is checking: " << lower << std::endl;
+        //std::cout << "Thread " << thread_id << " is checking: " << lower << std::endl;
 
         if (result == goal) {
             std::cout << "Password Cracked: " << lower << std::endl;
@@ -137,23 +140,18 @@ void start(int thread_id) {
     }
 }
 
-/*
-    
-    aaaaaa - aaaaac
-    aaaaac - a
-    aaaaay - aaaaaz
-    aaaaaz - zzzzzz
-*/
-
 int main(int argc, char** argv) {
     //std::cout << md5_encrypt("ssssss", "4fTgjp6q") << std::endl;
-    std::string password = "aaaaaa";
-    std::string result;
+    int thread_count = 14;
+
+    printf("CPU: Intel Core i9-9900k\n");
+    printf("    Total cores available: %d.\n", get_nprocs());
+    printf("    Launching %d threads.\n", thread_count);
 
     std::vector<std::thread> threads;
 
     auto started = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i < 14; i ++) {
+    for (int i = 0; i < thread_count; i ++) {
         threads.push_back(std::thread(start, i));
     }
 
@@ -162,7 +160,9 @@ int main(int argc, char** argv) {
     }
     
     auto done = std::chrono::high_resolution_clock::now();
-    std::cout << "This process used " << std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count() << " milliseconds." << std::endl;
+    auto seconds = std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count() / 1000;
+    std::cout << "This process used " << seconds << " seconds." << std::endl;
+    std::cout << lines << " passwords were tested, (" << lines / seconds << " passwords/s)\n" << std::endl;
     
     return 0;
 }

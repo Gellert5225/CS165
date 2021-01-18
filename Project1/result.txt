@@ -1,0 +1,6 @@
+CPU: Intel Core i9-9900k
+    Total cores available: 16.
+    Launching 14 threads.
+Password Cracked: rtdzwu
+This process used 5093 seconds.
+165649305 passwords were tested, (32524 passwords/s)
